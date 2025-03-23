@@ -3,10 +3,10 @@
     <h3>{{ question.question }}</h3>
     <ul>
       <li v-for="(choice, index) in question.choices" :key="choice">
-        <label :for="`choice-${index}`">
+        <label :for="`answer${index}`">
           <input
-            :for="`choice-${index}`"
-            name="radio"
+            :id="`answer${index}`"
+            name="answer"
             type="radio"
             v-model="answer"
             :value="choice"
@@ -18,7 +18,7 @@
   </div>
 </template>
 <script setup>
-import { ref, computed } from 'vue'
+import { ref, computed, watch } from 'vue'
 const props = defineProps({
   question: Object,
 })
@@ -26,6 +26,9 @@ const props = defineProps({
 const emits = defineEmits(['answer'])
 const answer = ref(null)
 const hasAnswer = computed(() => answer.value !== null)
+// watch(() => props.question, () => {
+//   answer.value = null
+// })
 </script>
 <style scoped>
 .question {
