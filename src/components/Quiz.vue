@@ -9,7 +9,7 @@
       @answer="addAnswer"
     />
     <Recap v-if="quizState === 'recap'" :answers="answers" :quiz="quiz" />
-    {{ answers }}
+    <!-- {{ answers }} -->
   </div>
 </template>
 <script setup>
