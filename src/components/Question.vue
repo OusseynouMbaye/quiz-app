@@ -2,7 +2,7 @@
   <div class="question">
     <h3>{{ question.question }}</h3>
     <ul>
-      <li v-for="(choice, index) in question.choices" :key="choice">
+      <li v-for="(choice, index) in randomChoices" :key="choice">
         <label :for="`answer${index}`">
           <input
             :id="`answer${index}`"
@@ -19,6 +19,7 @@
 </template>
 <script setup>
 import { ref, computed, watch } from 'vue'
+import { shuffleArray } from '@/functions/array.js'
 const props = defineProps({
   question: Object,
 })
@@ -26,9 +27,8 @@ const props = defineProps({
 const emits = defineEmits(['answer'])
 const answer = ref(null)
 const hasAnswer = computed(() => answer.value !== null)
-// watch(() => props.question, () => {
-//   answer.value = null
-// })
+
+const randomChoices = computed(() => shuffleArray(props.question.choices))
 </script>
 <style scoped>
 .question {
