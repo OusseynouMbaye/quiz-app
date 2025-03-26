@@ -1,7 +1,6 @@
 <template>
   <div class="question">
     <h3>{{ question.question }}</h3>
-    {{ timer }}
     <ul>
       <li v-for="(choice, index) in randomChoices" :key="choice">
         <Answer
@@ -42,7 +41,9 @@ const onAnswer = () => {
 
 onMounted(() => {
   timer = setTimeout(() => {
-    emits('answer', answer.value)
+    // emits('answer', answer.value)
+    answer.value = ''
+    onAnswer()
   }, 5_000)
 })
 
@@ -64,11 +65,3 @@ onUnmounted(() => {
   }
 }
 </style>
-<!-- onMounted(() => {
-  timer = setInterval(() => {
-    if (hasAnswer.value) {
-      clearInterval(timer)
-      emits('answer', answer.value)
-    }
-  }, 3_000)
-}) -->
