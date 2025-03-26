@@ -5,20 +5,28 @@
       :id="id"
       name="answer"
       type="radio"
-      v-model="model"
       :value="value"
+      v-model="model"
+      @change="onChange"
     />{{ value }}
   </label>
 </template>
 <script setup>
 import { computed } from 'vue'
+
 const props = defineProps({
   id: String,
   disabled: Boolean,
   value: String,
   correctAnswer: String,
 })
+
 const model = defineModel()
+const emits = defineEmits(['change'])
+
+const onChange = (event) => {
+  emits('change', event)
+}
 
 const classes = computed(() => ({
   disabled: props.disabled,
